@@ -1,96 +1,44 @@
 'use strict';
 
-/*app.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users){
-  $http.get('/api/index.php/users').success(function(data) {
-    $scope.users = data;
-    });*/
-
-//Factory for fetching UserData
-/*
- app.factory('users', function($http){
-  function getData(callback){
-    $http({
-      method: 'GET',
-      url: '/api/index.php/users',
-      cache: false
-    }).success(callback);
-  }
-
-
-   return {
-    list: getData
-  };
-});
-*/
-
-
-app.factory('users', ['$http', function($http) {
-  var urlBase = '/api/index.php/users';
-  var dataFactory = {};
-
-  dataFactory.getUsers = function () {
-    return $http.get(urlBase);
-  }
-
-  dataFactory.createNewUser = function(username){
-    return $http.post(urlBase, {"name": username})
-  };
-
-  return dataFactory;
-}]);
-
-
-//Factory for creating users
-app.factory('createUser', ['$http', function($http) {
-  var urlBase = '/api/index.php/users';
-  var dataFactory = {};
-
-  dataFactory.createNewUser = function(username){
-    return $http.post(urlBase, {"name": username})
-  };
-
-  dataFactory.getUsers = function () {
-    return $http.get(urlBase);
-  }
-
-  return dataFactory;
-
-}]);
-
 //ChoseUserCtrl
-app.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users, createUser, $window, $timeout) {
+app.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, $http) {
 
+  //Defining the API-urlbase for the ChooseUserCtrl
+  var urlBase = '/api/index.php/users';
 
+  // Defining the function to fetch all users
+  $scope.loadUsers = function () {
+  $http.get(urlBase)
+      .success(function (data) {
+        $scope.users = data;
+      });
+  };
 
-   users.list(function (users) {
-     $timeout(function() {
-       $scope.users = users;
-       $scope.$apply()
-     }, 1000);
-  });
+  $scope.loadUsers(); //when landing on the page, get all users
 
+  //When submitting the Username form, send the new user to the API
+  $scope.submitNewUser = function(username) {
+    $http.post(urlBase, {"name": username})
+        .success(function (data) {
+          $scope.username = ""; // clear the form after submit
+          $scope.loadUsers(); //Refetch all users
+        })
+  };
 
-
-
-
-
-
-
+  //Default localStorage is -1. (No User Selected)
   $scope.$storage = $localStorage.$default({
     userid: -1
   });
 
+  //If a user revisits the site and the localStorage is already set, reroute to /opportunities
   if ($localStorage.userid != -1) { $location.path('/opportunities')}
 
 
+
   $scope.createNewUser = function(username){
-    //Check if the hidden Input filledByBot is emtpy. If not, just ignore the fkn bot.
+    //Check if the hidden Input filledByBot is emtpy. If not, just ignore the fkn bot. (Add a CAPTCHA later...)
     if(!document.getElementById('filledByBot').value){
-
-      createUser.createNewUser(username);
-
-    //  setTimeout(function(){$scope.loadUsers();}, 5000);
-   //   setTimeout(function(){$window.location.reload(true)}, 500);
+      $scope.submitNewUser(username);
     }
   }
 });
