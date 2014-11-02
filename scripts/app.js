@@ -1,8 +1,8 @@
 'use strict';
 
-var swubadschApp = angular.module('swubadschApp', ['ngRoute', 'ngStorage']);
+var app = angular.module('app', ['ngRoute', 'ngStorage']);
 
-swubadschApp.config(function($routeProvider) {
+app.config(function($routeProvider) {
 
 
   $routeProvider.

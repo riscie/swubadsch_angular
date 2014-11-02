@@ -1,7 +1,7 @@
 'use strict';
 
 //Factory for fetching UserData
-swubadschApp.factory('users', function($http){
+app.factory('users', function($http){
   function getData(callback){
     $http({
       method: 'GET',
@@ -24,7 +24,7 @@ swubadschApp.factory('users', function($http){
 });
 
 //Factory for fetching Opportunities  - Refactor using this: http://weblogs.asp.net/dwahlin/using-an-angularjs-factory-to-interact-with-a-restful-service
-swubadschApp.factory('opportunities', function($http){
+app.factory('opportunities', function($http){
   function getData(callback){
     $http({
       method: 'GET',
@@ -48,7 +48,7 @@ swubadschApp.factory('opportunities', function($http){
 
 
 //Factory for signing users in
-swubadschApp.factory('signing', ['$http', function($http) {
+app.factory('signing', ['$http', function($http) {
       var urlBase = '/api/index.php/opportunities/';
       var dataFactory = {};
 
@@ -66,7 +66,7 @@ swubadschApp.factory('signing', ['$http', function($http) {
 
 
 //Factory for fetching Comments
-swubadschApp.factory('comments', function($http){
+app.factory('comments', function($http){
   function getData(callback){
     $http({
       method: 'GET',
@@ -81,7 +81,7 @@ swubadschApp.factory('comments', function($http){
 });
 
 //Factory for creating new Comments
-swubadschApp.factory('newComment', ['$http', function($http) {
+app.factory('newComment', ['$http', function($http) {
   var urlBase = '/api/index.php/comments/';
   var dataFactory = {};
 
@@ -95,7 +95,7 @@ swubadschApp.factory('newComment', ['$http', function($http) {
 
 
 //OpportunitiesCtrl
-swubadschApp.controller('OpportunitiesCtrl', function ($scope, $http, $localStorage, $filter, users, opportunities, signing, comments, newComment, $window, $route){
+app.controller('OpportunitiesCtrl', function ($scope, $http, $localStorage, $filter, users, opportunities, signing, comments, newComment, $window, $route){
 
   $scope.$storage = $localStorage;
   var timeline = [];

@@ -1,17 +1,18 @@
 'use strict';
 
-/*swubadschApp.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users){
+/*app.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users){
   $http.get('/api/index.php/users').success(function(data) {
     $scope.users = data;
     });*/
 
 //Factory for fetching UserData
-swubadschApp.factory('users', function($http){
+/*
+ app.factory('users', function($http){
   function getData(callback){
     $http({
       method: 'GET',
       url: '/api/index.php/users',
-      cache: true
+      cache: false
     }).success(callback);
   }
 
@@ -20,9 +21,27 @@ swubadschApp.factory('users', function($http){
     list: getData
   };
 });
+*/
+
+
+app.factory('users', ['$http', function($http) {
+  var urlBase = '/api/index.php/users';
+  var dataFactory = {};
+
+  dataFactory.getUsers = function () {
+    return $http.get(urlBase);
+  }
+
+  dataFactory.createNewUser = function(username){
+    return $http.post(urlBase, {"name": username})
+  };
+
+  return dataFactory;
+}]);
+
 
 //Factory for creating users
-swubadschApp.factory('createUser', ['$http', function($http) {
+app.factory('createUser', ['$http', function($http) {
   var urlBase = '/api/index.php/users';
   var dataFactory = {};
 
@@ -30,15 +49,31 @@ swubadschApp.factory('createUser', ['$http', function($http) {
     return $http.post(urlBase, {"name": username})
   };
 
+  dataFactory.getUsers = function () {
+    return $http.get(urlBase);
+  }
+
   return dataFactory;
 
 }]);
 
 //ChoseUserCtrl
-swubadschApp.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users, createUser, $window){
-  users.list(function(users) {
-      $scope.users = users;
+app.controller('ChooseUserCtrl', function ($scope, $localStorage, $location, users, createUser, $window, $timeout) {
+
+
+
+   users.list(function (users) {
+     $timeout(function() {
+       $scope.users = users;
+       $scope.$apply()
+     }, 1000);
   });
+
+
+
+
+
+
 
 
   $scope.$storage = $localStorage.$default({
@@ -51,8 +86,11 @@ swubadschApp.controller('ChooseUserCtrl', function ($scope, $localStorage, $loca
   $scope.createNewUser = function(username){
     //Check if the hidden Input filledByBot is emtpy. If not, just ignore the fkn bot.
     if(!document.getElementById('filledByBot').value){
+
       createUser.createNewUser(username);
-      setTimeout(function(){$window.location.reload(true)}, 500);
+
+    //  setTimeout(function(){$scope.loadUsers();}, 5000);
+   //   setTimeout(function(){$window.location.reload(true)}, 500);
     }
   }
 });
