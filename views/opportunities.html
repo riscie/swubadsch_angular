@@ -1,0 +1,77 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">
+        <div class="swubadsch"><strong>SWU </strong> <strong>Bad</strong>minton <strong>Sch</strong>eduler</div>
+      </a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown"><div class="username">{{currentUser.name}}<span class="caret"></span></div></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="/#/" ng-click="$storage.userid = -1">Benutzer wechseln</a></li>
+        </ul>
+      </li>
+    </ul>
+</nav>
+
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <strong><img src="/images/shuttle.png" width="14"></img> Badminton Termine</strong>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th width="250"><strong>Datum</strong></th>
+        <td ng-repeat="event in timeline" class="today" ng-class="{'today': event.day.getDate() == today.getDate()}" class="opportunityTable">
+          <div ng-if="event.day.getDate() == today.getDate()">Heute</div>
+          <div ng-if="event.day.getDate() != today.getDate()">{{event.day | date : 'EEE dd. MMM'}}</div>  <!-- heute-sign :        <span ng-if="event.day.getDate() == today.getDate()"><br><small>(heute)</small></span> -->
+        </td>
+      </tr>
+
+      <tr>
+        <th><strong>Teilnehmer</strong></th>
+        <td ng-repeat="event in timeline" class="opportunityTable">
+          <span ng-repeat="opportunity in opportunities | filter : opportunity.date = reformat(event.day)"><h4><span class="glyphicon glyphicon-user"></span>
+            <span ng-repeat="user in users | filter: opportunity.user_id">
+              {{user.name}}</h4>
+            </span>
+          </span>
+        </td>
+        </tr>
+      <tr>
+        <th><strong>Ein- / Austragen</strong></th>
+        <td ng-repeat="event in timeline" class="opportunityTable">
+        <div ng-if="!event.userParticipates"><button class="btn btn-default signIn" ng-click="addUserToOpportunity(event.day, currentUser.id); event.userParticipates = !event.userParticipates;"><span class="glyphicon glyphicon-ok"></span>&nbsp;<strong>&nbsp;teilnehmen</strong></a><br></div>
+        <div ng-if="event.userParticipates"><button class="btn btn-default signOut" ng-click="removeUserToOpportunity(event.id); event.userParticipates = !event.userParticipates;"><span class="glyphicon glyphicon-remove"></span>&nbsp;<strong>&nbsp;austragen</strong></a><br></div>
+        </tr>
+
+
+
+      <tr>
+        <th><strong>Kommentare</strong></th>
+        <td ng-repeat="event in timeline" class="opportunityTable">
+           <span ng-repeat="comment in comments| filter : comment.date = reformat(event.day)">
+             <span ng-repeat="user in users | filter: comment.user_id">
+               <strong>{{user.name}}:</strong>
+            </span>
+          {{comment.text}}<br>
+           </span>
+        </td>
+
+      </tr>
+
+
+      <tr>
+        <th><strong>Neuer Kommentar</strong></th>
+        <td ng-repeat="event in timeline">
+          <textarea ng-model="commentText" maxlength="600" class="form-control"></textarea><br>
+          <button type="submit" ng-click="addComment(commentText, currentUser.id, event.day)" class="btn btn-default sendComment" ng-disabled="!commentText" ng-class="{'greyedOutCommentButton': !commentText}"> <span class="glyphicon glyphicon-saved"></span> <strong>Absenden</strong></button>
+        </td>
+      </tr>
+    </table>
+    </div>
+    </div>
+</div>
