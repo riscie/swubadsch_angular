@@ -10,7 +10,6 @@ include('connection.php'); // includes the connection with Username / Password f
 
 $clients = [];
 
-
 /**
 * The MIT License
 * http://creativecommons.org/licenses/MIT/
