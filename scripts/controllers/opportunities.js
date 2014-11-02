@@ -95,7 +95,7 @@ app.factory('newComment', ['$http', function($http) {
 
 
 //OpportunitiesCtrl
-app.controller('OpportunitiesCtrl', function ($scope, $http, $localStorage, $filter, users, opportunities, signing, comments, newComment, $window, $route){
+app.controller('OpportunitiesCtrl', function ($scope, $http, $localStorage, $filter, users, opportunities, signing, comments, newComment, $window){
 
   $scope.$storage = $localStorage;
   var timeline = [];
@@ -168,7 +168,6 @@ app.controller('OpportunitiesCtrl', function ($scope, $http, $localStorage, $fil
       if (arr[i].b == value) return arr[i];
     }
   }
-
 
   $scope.addUserToOpportunity = function(day, user_id){
     signing.signUserIn($scope.reformat(day), user_id);

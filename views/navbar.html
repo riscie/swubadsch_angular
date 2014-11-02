@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <div class="swubadsch"><strong>SWU </strong> <strong>Bad</strong>minton <strong>Sch</strong>eduler</div>
+            </a>
+        </div>
+        <div ng-if="$storage.userid != -1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><div class="username">{{currentUser.name}}<span class="caret"></span></div></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/#/" ng-click="$storage.userid = -1">Benutzer wechseln</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+</nav>
