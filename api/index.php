@@ -1,7 +1,7 @@
 <?php
 
 
-include('connection.php');
+include('connection.php'); // includes the connection with Username / Password for the MySql DB
 $clients = [];
 
 
