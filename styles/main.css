@@ -50,9 +50,3 @@ td.opportunityTable {
     min-width: 240px;
     overflow: scroll;
 }
-
-@media (max-width: 768px) {
-    body {
-        padding-top: 115px; /*Needed because NavBar is 2 rows on mobiles*/
-    }
-}
