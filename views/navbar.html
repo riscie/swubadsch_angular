@@ -8,7 +8,9 @@
         <div ng-if="$storage.userid != -1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><div class="username">{{currentUser.name}}<span class="caret"></span></div></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <div class="username">{{currentUser.name}}<span class="caret"></span></div>
+                    </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/#/" ng-click="$storage.userid = -1">Benutzer wechseln</a></li>
                     </ul>

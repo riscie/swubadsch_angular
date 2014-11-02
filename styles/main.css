@@ -1,65 +1,60 @@
 /* Space out content a bit */
 body {
-  padding-top: 70px;
-  padding-bottom: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
+    padding-top: 70px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-
-
-
 .signIn {
-  color: limegreen;
+    color: limegreen;
 }
 
 .signIn:hover {
-  color: green;
+    color: green;
 }
-
 
 .signOut {
-  color: orangered;
-}
-.signOut:hover {
-  color: mediumvioletred;
+    color: orangered;
 }
 
+.signOut:hover {
+    color: mediumvioletred;
+}
 
 .sendComment:hover {
-  color: limegreen;
+    color: limegreen;
 }
 
-.createUser:hover{
-  color: limegreen;
+.createUser:hover {
+    color: limegreen;
 }
 
 .today {
-  font-weight: bold;
+    font-weight: bold;
 }
-
 
 .username {
-  font-weight: bold;
+    font-weight: bold;
 }
 
-.greyedOutCommentButton{
-  color: darkslategray;
+.greyedOutCommentButton {
+    color: darkslategray;
 }
 
-p{
-  word-break: break-all;
+p {
+    word-break: break-all;
 }
 
-td.opportunityTable{
-  max-width: 240px;
-  min-width: 240px;
-  overflow: scroll;
+td.opportunityTable {
+    max-width: 240px;
+    min-width: 240px;
+    overflow: scroll;
 }
 
 @media (max-width: 768px) {
-  body {
-    padding-top: 115px;
-    
-  }
+    body {
+        padding-top: 115px;
+
+    }
 }

@@ -1,21 +1,24 @@
 <div ng-include="'/views/navbar.html'"></div>
 
 <div class="panel panel-success lime">
-  <div class="panel-heading">
-    <img src="/images/shuttle.png" width="14"><strong>&nbsp;&nbsp;Bitte Benutzer auswählen</strong>
-  </div>
-  <div class="panel-body">
-    <div class="form-group col-lg-2">
-<div ng-repeat="user in users">
-  <h4><span class="glyphicon glyphicon-user"></span> <a ng-click="$storage.userid = user.id" href="#/opportunities">{{user.name}}</h4></a></div>
-<br>
-  Nicht aufgelistet?
-<form>
-
-  <input type="text" ng-model="username" class="form-control" placeholder="Benutzername">
-  <input type="text" id="filledByBot" style="display:none;"/> <!-- Basic protection against Spambots, if Input is filled, its a bot -->
-
-  <button type="submit" ng-click="createNewUser(username)" class="btn btn-default createUser"> <span class="glyphicon glyphicon-saved"></span><strong> Erstell mich...</strong></button>
-</form>
+    <div class="panel-heading">
+        <img src="/images/shuttle.png" width="14"><strong>&nbsp;&nbsp;Bitte Benutzer auswählen</strong>
     </div>
-</div>
+    <div class="panel-body">
+        <div class="form-group col-lg-2">
+            <div ng-repeat="user in users">
+                <h4><span class="glyphicon glyphicon-user"></span> <a ng-click="$storage.userid = user.id" href="#/opportunities">{{user.name}}</h4></a>
+            </div>
+            <br>
+            Nicht aufgelistet?
+            <form>
+
+                <input type="text" ng-model="username" class="form-control" placeholder="Benutzername">
+                <input type="text" id="filledByBot" style="display:none;"/>
+                <!-- Basic protection against Spambots, if Input is filled, its a bot -->
+
+                <button type="submit" ng-click="createNewUser(username)" class="btn btn-default createUser"><span
+                        class="glyphicon glyphicon-saved"></span><strong> Erstell mich...</strong></button>
+            </form>
+        </div>
+    </div>
