@@ -1,4 +1,3 @@
-/* Space out content a bit */
 body {
     padding-top: 70px;
     padding-bottom: 20px;
@@ -54,7 +53,6 @@ td.opportunityTable {
 
 @media (max-width: 768px) {
     body {
-        padding-top: 115px;
-
+        padding-top: 115px; /*Needed because NavBar is 2 rows on mobiles*/
     }
 }
