@@ -2,6 +2,12 @@
 
 
 include('connection.php'); // includes the connection with Username / Password for the MySql DB
+//Usage:
+//Change the $dsn variable located at the top, here are some examples:
+//    SQLite: $dsn = 'sqlite://./path/to/database.sqlite';
+//    MySQL: $dsn = 'mysql://[user[:pass]@]host[:port]/db/;
+//    PostgreSQL: $dsn = 'pgsql://[user[:pass]@]host[:port]/db/;
+
 $clients = [];
 
 
